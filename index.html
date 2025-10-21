@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Room - Remote Control</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Login View -->
+    <div id="login-view" class="view">
+        <div class="container">
+            <h1>Remote Login</h1>
+            <div id="login-error" class="error-msg"></div>
+            <div class="form-group">
+                <label for="device-address">Device Address</label>
+                <input type="text" id="device-address" placeholder="e.g., http://smartroom.local">
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" value="admin">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" value="admin123">
+            </div>
+            <button id="login-btn" class="btn">Login</button>
+        </div>
+    </div>
+
+    <!-- Control View -->
+    <div id="control-view" class="view" style="display: none;">
+        <div class="container">
+            <div class="header">
+                <h1>Remote Control</h1>
+                <button id="logout-btn" class="btn-logout">Logout</button>
+            </div>
+            <div id="connection-status" class="error-msg"></div>
+
+            <div class="device">
+                <div>
+                    <h3>💡 Light 1</h3>
+                    <div class="status off" id="light1-status">OFF</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="light1">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="device">
+                <div>
+                    <h3>💡 Light 2</h3>
+                    <div class="status off" id="light2-status">OFF</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="light2">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="device fan-control">
+                <div class="top">
+                    <h3>🌀 Fan Control</h3>
+                    <div class="status off" id="fan-status">OFF</div>
+                </div>
+                <input type="range" min="0" max="3" value="0" class="speed-slider" id="fanSlider">
+            </div>
+
+            <div class="device">
+                <div>
+                    <h3>❄️ Air Conditioner</h3>
+                    <div class="status off" id="ac-status">OFF</div>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="ac">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <button class="btn-danger" id="all-off-btn">🔌 Turn All OFF</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
