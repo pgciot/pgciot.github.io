@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-        databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT_ID.appspot.com",
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-        appId: "YOUR_APP_ID"
+        apiKey: "AIzaSyAXUrwpU0xoPv-HevayyicFOTqNXmdXghk",
+        authDomain: "smart-room-control-1.firebaseapp.com",
+        databaseURL: "https://smart-room-control-1-default-rtdb.firebaseio.com",
+        projectId: "smart-room-control-1",
+        storageBucket: "smart-room-control-1.firebasestorage.app",
+        messagingSenderId: "939024826629",
+        appId: "1:939024826629:web:b5ba73b0a3f9738ddcf76c",
     };
     const FIREBASE_BASE_PATH = "smart-room";
 
