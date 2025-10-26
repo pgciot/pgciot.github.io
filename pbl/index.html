@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>PBL IoT Project 1 - Smart Room Control v5.0.1</title>
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="SmartRoom v5.0.1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main App Container -->
+    <div class="container">
+        <div class="header">
+            <h1>🏠 Smart Room Control</h1>
+            <button class="config-btn" onclick="openConfig()" title="Settings">⚙️</button>
+            <div class="network-status" id="network-status">
+                🔄 Connecting...
+            </div>
+        </div>
+
+        <!-- Office Time Indicator -->
+        <div class="office-indicator home-time" id="office-indicator" >
+            🏠 Home Time
+        </div>
+
+        <!-- Motion Sensor Status (Hidden by default, shows when motion detected) -->
+        <div class="device motion-alert" id="motion-alert" style="display: none;">
+            <h3>🚶 Motion Detected</h3>
+            <div class="status motion-status">
+                <span class="motion-indicator motion-active"></span>
+                Light 1 Auto ON
+            </div>
+        </div>
+
+        <!-- Lights Section -->
+        <div class="device">
+            <h3>💡 Light 1</h3>
+            <label class="switch">
+                <input type="checkbox" id="light1" onchange="toggleDevice('light1', this.checked)">
+                <span class="slider"></span>
+            </label>
+            <div class="status off" id="light1-status">OFF</div>
+        </div>
+
+        <div class="device">
+            <h3>💡 Light 2</h3>
+            <label class="switch">
+                <input type="checkbox" id="light2" onchange="toggleDevice('light2', this.checked)">
+                <span class="slider"></span>
+            </label>
+            <div class="status off" id="light2-status">OFF</div>
+        </div>
+
+        <!-- Fan Control -->
+        <div class="device">
+            <h3>卐 Fan Control</h3>
+            <div class="slider-container">
+                <input type="range" min="0" max="4" value="0" class="speed-slider" id="fanSlider" onchange="setFanSpeed(this.value)">
+                <div class="speed-labels">
+                    <span>OFF</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                </div>
+                <div class="speed-value" id="fanSpeedValue">OFF</div>
+            </div>
+        </div>
+
+        <!-- AC Control -->
+        <div class="device">
+            <h3>❄️ Air Conditioner</h3>
+            <label class="switch">
+                <input type="checkbox" id="ac" onchange="toggleDevice('ac', this.checked)">
+                <span class="slider"></span>
+            </label>
+            <div class="status off" id="ac-status">OFF</div>
+        </div>
+
+        <!-- Control Buttons -->
+        <button class="btn btn-danger" onclick="toggleAllOff()">🔌 Turn All OFF</button>
+        <button class="btn btn-secondary" onclick="refreshStatus()">🔄 Refresh Status</button>
+    </div>
+
+    <!-- Configuration Modal -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚙️ Configuration</h2>
+                <button class="close-btn" onclick="closeConfig()">×</button>
+            </div>
+            
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="openTab('wifi-tab')">WiFi</button>
+                <button class="tab-btn" onclick="openTab('hotspot-tab')">Hotspot</button>
+                <button class="tab-btn" onclick="openTab('admin-tab')">Admin</button>
+            </div>
+            
+            <!-- WiFi Tab -->
+            <div id="wifi-tab" class="tab-content active">
+                <div class="form-group">
+                    <label>WiFi SSID:</label>
+                    <input type="text" id="wifi-ssid" placeholder="Your WiFi network name">
+                </div>
+                <div class="form-group">
+                    <label>WiFi Password:</label>
+                    <input type="password" id="wifi-password" placeholder="Your WiFi password">
+                </div>
+                <button class="btn btn-secondary" onclick="scanWiFi()">📡 Scan Networks</button>
+                <div id="scan-results"></div>
+                <button class="btn btn-success" onclick="saveWiFi()">💾 Save WiFi</button>
+            </div>
+            
+            <!-- Hotspot Tab -->
+            <div id="hotspot-tab" class="tab-content">
+                <div class="form-group">
+                    <label>Hotspot SSID:</label>
+                    <input type="text" id="ap-ssid" placeholder="SmartRoom_Control">
+                </div>
+                <div class="form-group">
+                    <label>Hotspot Password:</label>
+                    <input type="password" id="ap-password" placeholder="Minimum 8 characters">
+                </div>
+                <div class="password-warning">
+                    ⚠️ Password must be at least 8 characters long
+                </div>
+                <button class="btn btn-success" onclick="saveAP()">💾 Save Hotspot</button>
+            </div>
+
+            <!-- Admin Tab -->
+            <div id="admin-tab" class="tab-content">
+                <div class="form-group">
+                    <label>Admin Username:</label>
+                    <input type="text" id="admin-username" placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>Admin Password:</label>
+                    <input type="password" id="admin-password" placeholder="New password">
+                </div>
+                <div class="password-warning">
+                    ⚠️ Change default password for security
+                </div>
+                <button class="btn btn-success" onclick="saveAdmin()">💾 Save Admin</button>
+            </div>
+            
+            <div class="config-actions">
+                <button class="btn btn-theme" onclick="toggleTheme()" id="themeToggle">
+                    🌙 Dark Mode
+                </button>
+                <button class="btn btn-secondary" onclick="restartDevice()">🔄 Restart Device</button>
+                <button class="btn btn-secondary" onclick="openAboutModal()">ⓘ About</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ℹ️ About Smart Room</h2>
+                <button class="close-btn" onclick="closeAboutModal()">×</button>
+            </div>
+            <p><strong>Project Name:</strong> PBL IoT Project 1</p>
+            <p><strong>Version:</strong> 5.0.1</p>
+            <p><strong>Developed by:</strong> PBL IT & MIS</p>
+            <p><strong>Developer:</strong><a href="https://eMithun.github.io" target="_blank"> Syed Mortoja Hasan Mithun</a></p>
+            <p><strong>Contact:</strong> <a href="mailto:mithun@email.com"> mithun@email.com</a></p>
+            <p><strong>Copyright (c) 2025, Syed Mortoja Hasan Mithun</strong></p>
+            <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-secondary);">This project aims to provide intelligent control over home appliances using an ESP8266 microcontroller and a web-based interface.</p>
+        </div>
+    </div>
+
+    <!-- Firebase Auth Modal -->
+    <div id="firebaseAuthModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🔒 Firebase Login</h2>
+            </div>
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="openFirebaseAuthTab('email-password-tab')">Email</button>
+                <button class="tab-btn" onclick="openFirebaseAuthTab('google-tab')">Google</button>
+                <button class="tab-btn" onclick="openFirebaseAuthTab('apple-tab')">Apple</button>
+                <button class="tab-btn" onclick="openFirebaseAuthTab('anonymous-tab')">Anonymous</button>
+            </div>
+
+            <!-- Email/Password Tab -->
+            <div id="email-password-tab" class="tab-content active">
+                <div class="form-group">
+                    <label for="auth-email">Email:</label>
+                    <input type="email" id="auth-email" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="auth-password">Password:</label>
+                    <input type="password" id="auth-password" placeholder="password">
+                </div>
+                <div id="auth-error" style="color: var(--danger-color); margin-bottom: 10px; display: none;"></div>
+                <button class="btn btn-success" onclick="signUpWithEmail()">Sign Up</button>
+                <button class="btn btn-primary" onclick="signInWithEmail()">Sign In</button>
+            </div>
+
+            <!-- Google Tab -->
+            <div id="google-tab" class="tab-content">
+                <button class="btn btn-primary" onclick="signInWithGoogle()">Sign In with Google</button>
+            </div>
+
+            <!-- Apple Tab -->
+            <div id="apple-tab" class="tab-content">
+                <button class="btn btn-primary" onclick="signInWithApple()">Sign In with Apple</button>
+            </div>
+
+            <!-- Anonymous Tab -->
+            <div id="anonymous-tab" class="tab-content">
+                <p>Sign in anonymously to control devices without an account.</p>
+                <button class="btn btn-primary" onclick="signInAnonymously()">Sign In Anonymously</button>
+            </div>
+
+            <div class="config-actions" style="margin-top: 20px;">
+                <button class="btn btn-danger" onclick="signOutFirebase()">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PWA Install Prompt -->
+    <div id="installPrompt" class="install-prompt">
+        <p>📱 Install Smart Room App?</p>
+        <button onclick="installApp()">Install</button>
+        <button onclick="dismissInstall()">Not Now</button>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
