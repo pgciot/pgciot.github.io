@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'admin'",
+        ".write": "$uid === auth.uid || root.child('users').child(auth.uid).child('role').val() === 'admin'"
+      }
+    },
+    "status": {
+      // Anyone authenticated & approved can read status
+      ".read": "auth != null && root.child('users').child(auth.uid).child('approved').val() === true",
+      // Only the device (or admin) can write status
+      ".write": "auth != null" 
+    },
+    "command": {
+      // Anyone authenticated & approved can write commands
+      ".write": "auth != null && root.child('users').child(auth.uid).child('approved').val() === true",
+      // Device reads commands
+      ".read": "auth != null"
+    }
+  }
+}
