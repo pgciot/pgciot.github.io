@@ -13,6 +13,8 @@
     <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon-16x16.png">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 </head>
 <body>
     <!-- Auth Container (Login) -->
@@ -82,28 +84,44 @@
                 <div class="connection-status" id="connection-status">Connecting...</div>
             </div>
             <div class="header-controls">
-                <button class="settings-btn" id="btn-settings-menu" title="Menu">⚙️</button>
+                <button class="settings-btn" id="btn-settings-menu" title="Menu">
+                    <span class="material-icons-round">menu</span>
+                </button>
                 <div class="dropdown-menu hidden" id="dropdown-menu">
-                    <button id="btn-theme-toggle">🌙 Dark Mode</button>
-                    <button id="btn-admin" class="hidden">🛡️ Admin Panel</button>
-                    <button id="btn-wifi-settings">📶 WiFi Config</button>
+                    <button id="btn-theme-toggle">
+                        <span class="material-icons-round">dark_mode</span>
+                        <span>Dark Mode</span>
+                    </button>
+                    <button id="btn-admin" class="hidden">
+                        <span class="material-icons-round">admin_panel_settings</span>
+                        <span>Admin Panel</span>
+                    </button>
+                    <button id="btn-wifi-settings">
+                        <span class="material-icons-round">wifi</span>
+                        <span>WiFi Config</span>
+                    </button>
                     <div class="dropdown-divider"></div>
-                    <button id="btn-logout" class="logout-item">🚪 Logout</button>
+                    <button id="btn-logout" class="logout-item">
+                        <span class="material-icons-round">logout</span>
+                        <span>Logout</span>
+                    </button>
                 </div>
             </div>
         </header>
         
         <!-- Office Time Indicator -->
         <div class="office-indicator home-time" id="office-indicator">
-            🏠 Home Time
+            <span class="material-icons-round">home</span>
+            <span>Home Time</span>
         </div>
 
         <main>
             <!-- Light 1 -->
             <div class="card">
                 <div class="card-header">
-                    <span class="icon">💡</span>
+                    <span class="material-icons-round icon">lightbulb</span>
                     <span class="label">Light 1</span>
+                    <span class="status-badge" id="status-light1">OFF</span>
                 </div>
                 <div class="card-body">
                     <label class="toggle-switch">
@@ -116,8 +134,9 @@
             <!-- Light 2 -->
             <div class="card">
                 <div class="card-header">
-                    <span class="icon">💡</span>
+                    <span class="material-icons-round icon">lightbulb</span>
                     <span class="label">Light 2</span>
+                    <span class="status-badge" id="status-light2">OFF</span>
                 </div>
                 <div class="card-body">
                     <label class="toggle-switch">
@@ -130,8 +149,9 @@
             <!-- AC -->
             <div class="card">
                 <div class="card-header">
-                    <span class="icon">❄️</span>
+                    <span class="material-icons-round icon">ac_unit</span>
                     <span class="label">Air Conditioner</span>
+                    <span class="status-badge" id="status-ac">OFF</span>
                 </div>
                 <div class="card-body">
                     <label class="toggle-switch">
@@ -144,7 +164,7 @@
             <!-- Fan -->
             <div class="card fan-card">
                 <div class="card-header">
-                    <span class="icon">🌀</span>
+                    <span class="material-icons-round icon">mode_fan</span>
                     <span class="label">Fan Control</span>
                     <span class="value" id="fan-value">OFF</span>
                 </div>
@@ -172,8 +192,8 @@
     <!-- Settings Modal -->
     <div id="settings-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" id="close-settings">&times;</span>
-            <h2>⚙️ System Config</h2>
+            <span class="close-btn" id="close-settings"><span class="material-icons-round">close</span></span>
+            <h2><span class="material-icons-round">settings</span> System Config</h2>
             
             <div class="form-group">
                 <label>WiFi SSID (Router Name)</label>
@@ -194,8 +214,8 @@
     <!-- Admin Modal -->
     <div id="admin-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" id="close-admin">&times;</span>
-            <h2>🛡️ User Management</h2>
+            <span class="close-btn" id="close-admin"><span class="material-icons-round">close</span></span>
+            <h2><span class="material-icons-round">admin_panel_settings</span> User Management</h2>
             <div id="user-list" class="user-list">
                 <!-- User items will be injected here -->
                 <div class="loader">Loading users...</div>

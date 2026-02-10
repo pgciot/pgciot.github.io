@@ -56,6 +56,9 @@ const els = {
     light1: document.getElementById('light1'),
     light2: document.getElementById('light2'),
     ac: document.getElementById('ac'),
+    statusLight1: document.getElementById('status-light1'),
+    statusLight2: document.getElementById('status-light2'),
+    statusAC: document.getElementById('status-ac'),
     fan: document.getElementById('fan'),
     fanValue: document.getElementById('fan-value'),
     status: document.getElementById('connection-status'),
@@ -236,7 +239,7 @@ function showApp(userData) {
     initAppListeners();
     
     // Initialize Extras (Theme & Time)
-    initTheme();
+    // initTheme(); // Theme is now initialized globally
     checkClientSideOfficeTime();
     setInterval(checkClientSideOfficeTime, 60000); // Check every minute
 }
@@ -244,12 +247,36 @@ function showApp(userData) {
 // --- THEME & TIME LOGIC ---
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Priority: Saved Preference > System Preference > Default (Light)
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
         document.documentElement.setAttribute('data-theme', 'dark');
-        els.btnTheme.textContent = '☀️';
+        updateThemeButton(true);
     } else {
         document.documentElement.removeAttribute('data-theme');
-        els.btnTheme.textContent = '🌙';
+        updateThemeButton(false);
+    }
+
+    // Listen for system theme changes (only applies if no manual override)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                updateThemeButton(true);
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                updateThemeButton(false);
+            }
+        }
+    });
+}
+
+function updateThemeButton(isDark) {
+    if (isDark) {
+        els.btnTheme.innerHTML = '<span class="material-icons-round">light_mode</span><span>Disable Dark Mode</span>';
+    } else {
+        els.btnTheme.innerHTML = '<span class="material-icons-round">dark_mode</span><span>Enable Dark Mode</span>';
     }
 }
 
@@ -258,11 +285,11 @@ els.btnTheme.addEventListener('click', () => {
     if (currentTheme === 'dark') {
         document.documentElement.removeAttribute('data-theme');
         localStorage.setItem('theme', 'light');
-        els.btnTheme.textContent = '🌙';
+        updateThemeButton(false);
     } else {
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
-        els.btnTheme.textContent = '☀️';
+        updateThemeButton(true);
     }
 });
 
@@ -277,19 +304,22 @@ function checkClientSideOfficeTime() {
     const officeStart = 8 * 60 + 30;
     const officeEnd = 17 * 60 + 30;
 
-    let text = '🏠 Home Time';
+    let text = 'Home Time';
+    let icon = 'home';
     let className = 'office-indicator home-time';
 
     // Check for Friday (5) or Saturday (6)
     if (currentDay === 5 || currentDay === 6) {
-        text = '🎉 Weekend / Off Day';
+        text = 'Weekend / Off Day';
+        icon = 'celebration';
         className = 'office-indicator off-day';
     } else if (currentTimeInMinutes >= officeStart && currentTimeInMinutes <= officeEnd) {
-        text = '🏢 Office Time';
+        text = 'Office Time';
+        icon = 'business';
         className = 'office-indicator office-time';
     }
 
-    els.officeIndicator.textContent = text;
+    els.officeIndicator.innerHTML = `<span class="material-icons-round">${icon}</span><span>${text}</span>`;
     els.officeIndicator.className = className;
 }
 
@@ -367,6 +397,11 @@ function initAppListeners() {
             els.ac.checked = data.ac;
             els.fan.value = data.fan;
             
+            // Update Passive Status Indicators
+            updateStatusBadge(els.statusLight1, data.light1);
+            updateStatusBadge(els.statusLight2, data.light2);
+            updateStatusBadge(els.statusAC, data.ac);
+
             const fanTxt = data.fan == 0 ? "OFF" : data.fan;
             els.fanValue.innerText = fanTxt;
             
@@ -425,9 +460,7 @@ els.btnAllOff.addEventListener('click', () => {
 });
 
 // Settings Logic
-els.btnSettings.addEventListener('click', () => {
-    els.modalSettings.classList.add('show');
-});
+// els.btnSettings is replaced by els.btnMenu
 
 els.btnCloseSettings.addEventListener('click', () => {
     els.modalSettings.classList.remove('show');
@@ -459,3 +492,16 @@ els.btnUpdateWifi.addEventListener('click', () => {
         els.modalSettings.classList.remove('show');
     }
 });
+
+function updateStatusBadge(element, isActive) {
+    if (isActive) {
+        element.textContent = "ON";
+        element.classList.add('on');
+    } else {
+        element.textContent = "OFF";
+        element.classList.remove('on');
+    }
+}
+
+// Initialize Theme on Load
+initTheme();

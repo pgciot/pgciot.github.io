@@ -122,9 +122,20 @@ body {
 .settings-btn {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    color: var(--text-color);
     cursor: pointer;
     padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+.settings-btn:hover {
+    background-color: var(--dropdown-hover);
+}
+.settings-btn .material-icons-round {
+    font-size: 28px;
 }
 
 /* Dropdown Menu */
@@ -132,7 +143,7 @@ body {
     position: absolute;
     top: 100%;
     right: 0;
-    width: 200px;
+    width: 220px;
     background: var(--dropdown-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -142,7 +153,9 @@ body {
     margin-top: 5px;
 }
 .dropdown-menu button {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 12px;
     width: 100%;
     text-align: left;
     padding: 12px 16px;
@@ -153,6 +166,10 @@ body {
     font-size: 0.95rem;
     transition: background 0.2s;
 }
+.dropdown-menu button .material-icons-round {
+    font-size: 20px;
+    color: var(--text-secondary);
+}
 .dropdown-menu button:hover {
     background: var(--dropdown-hover);
 }
@@ -162,6 +179,7 @@ body {
     margin: 4px 0;
 }
 .logout-item { color: #dc3545 !important; }
+.logout-item .material-icons-round { color: #dc3545 !important; }
 
 /* Admin User List */
 .user-list {
@@ -229,8 +247,37 @@ header h1 {
     align-items: center;
     gap: 12px;
 }
-.icon { font-size: 1.5rem; }
+.icon { 
+    font-size: 24px; 
+    color: var(--primary-color);
+}
 .label { font-weight: 600; font-size: 1rem; }
+
+.status-badge {
+    margin-left: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #e9ecef;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.status-badge.on {
+    background: #d4edda;
+    color: #155724;
+}
+
+[data-theme="dark"] .status-badge {
+    background: #30363d;
+    color: #8b949e;
+}
+
+[data-theme="dark"] .status-badge.on {
+    background: rgba(46, 125, 50, 0.2);
+    color: #81c784;
+}
 
 .fan-card { display: block; }
 .fan-card .card-header { margin-bottom: 20px; justify-content: flex-start; }
@@ -357,21 +404,43 @@ footer {
     align-items: center; justify-content: center;
 }
 .modal.show { display: flex; }
+/* Modal Content */
 .modal-content {
-    background: var(--card-bg);
-    color: var(--text-color);
-    padding: 25px;
-    border-radius: 15px;
+    background-color: var(--card-bg);
+    margin: auto;
+    padding: 20px;
+    border-radius: 16px;
     width: 90%;
-    max-width: 350px;
+    max-width: 400px;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    color: var(--text-color);
+}
+.modal-content h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .close-btn {
     position: absolute;
-    right: 15px; top: 10px;
+    top: 15px;
+    right: 20px;
+    color: #aaa;
     font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--text-color);
+    text-decoration: none;
 }
 .form-group { margin-bottom: 15px; text-align: left; }
 .form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
