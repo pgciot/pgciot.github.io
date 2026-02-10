@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padma Group of Converters</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="images/logo.png" alt="PGC IoT Logo">
+                <div class="logo-text">
+                    <h1>PGC IoT</h1>
+                    <span>Smart Solutions & Innovation</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about-footer">About Us</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact-footer">Contact</a></li>
+                    <li>
+                        <button id="theme-toggle" class="theme-toggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Slides Container -->
+        <div class="hero-slider">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="container hero-content">
+                    <h2>Welcome to</h2>
+                    <h1>PGC IoT Solutions</h1>
+                    <p>Pioneering Smart Technologies for a Connected Future</p>
+                    <a href="#projects" class="btn primary-btn">View Projects</a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="container hero-content">
+                    <h2>Innovation</h2>
+                    <h1>Industrial Automation</h1>
+                    <p>Optimizing Efficiency with Intelligent Control Systems</p>
+                    <a href="#projects" class="btn primary-btn">Learn More</a>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <div class="hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="container hero-content">
+                    <h2>Analytics</h2>
+                    <h1>Real-time Monitoring</h1>
+                    <p>Data-Driven Insights for Smarter Decision Making</p>
+                    <a href="#contact-footer" class="btn primary-btn">Contact Us</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Indicators -->
+        <div class="slider-indicators">
+            <div class="indicator active" data-slide="0"></div>
+            <div class="indicator" data-slide="1"></div>
+            <div class="indicator" data-slide="2"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Projects</h2>
+                <div class="divider"></div>
+                <p>Innovative IoT solutions transforming industries</p>
+            </div>
+            <div class="project-grid">
+                <!-- Project Items with Placeholder Images -->
+                <a href="../pbl/index.html" class="project-card">
+                    <div class="project-img">
+                        <img src="https://placehold.co/400x300/e9ecef/009640?text=Smart+Factory" alt="Smart Factory">
+                    </div>
+                    <div class="project-info">
+                        <h3>Smart Room (PBL)</h3>
+                        <p>IoT-enabled Smart Room for Factory office has implemented. for real-time operation, monitoring and efficiency analysis.</p>
+                    </div>
+                </a>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://placehold.co/400x300/e9ecef/009640?text=Energy+Mgmt" alt="Energy Management">
+                    </div>
+                    <div class="project-info">
+                        <h3>Energy Management</h3>
+                        <p>Advanced power tracking systems to optimize consumption and reduce costs.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://placehold.co/400x300/e9ecef/009640?text=Inventory+Track" alt="Inventory Tracking">
+                    </div>
+                    <div class="project-info">
+                        <h3>Inventory Tracking</h3>
+                        <p>Automated warehouse solutions using RFID and smart sensors.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://placehold.co/400x300/e9ecef/009640?text=Predictive+Maint" alt="Predictive Maintenance">
+                    </div>
+                    <div class="project-info">
+                        <h3>Predictive Maintenance</h3>
+                        <p>AI-driven analytics to foresee equipment failures before they happen.</p>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col" id="about-footer">
+                <h3>About PGC</h3>
+                <p>Padma Group of Converters is the leading packaging solution provider in Bangladesh, committed to quality and innovation.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#about-footer">About Us</a></li>
+                    <li><a href="#contact-footer">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col" id="contact-footer">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
+                <p><i class="fas fa-phone"></i> +880-2-988-1234</p>
+                <p><i class="fas fa-envelope"></i> info@padmagroupbd.com</p>
+            </div>
+            <div class="footer-col" id="contact-footer">
+                <h3>Location on map</h3>
+			<iframe loading="lazy" src="https://maps.google.com/maps?q=Padma%20Center%2C%2032%2C%201%20Dilu%20Rd%2C%20Dhaka%201000&amp;t=m&amp;z=15&amp;output=embed&amp;iwloc=near" title="Padma Center, 32, 1 Dilu Rd, Dhaka 1000" aria-label="Padma Center, 32, 1 Dilu Rd, Dhaka 1000"></iframe>
+		</div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 <a href="https://padmagroupbd.com/" target="_blank">Padma Group of Converters</a>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hero Slider Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            let currentSlide = 0;
+            const slideInterval = 5000; // 5 seconds
+            let slideTimer;
+
+            function showSlide(index) {
+                // Remove active class from all slides and indicators
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+
+                // Handle index wrapping
+                if (index >= slides.length) currentSlide = 0;
+                else if (index < 0) currentSlide = slides.length - 1;
+                else currentSlide = index;
+
+                // Add active class to current slide and indicator
+                slides[currentSlide].classList.add('active');
+                indicators[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            // Event Listeners
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    showSlide(slideIndex);
+                    resetTimer();
+                });
+            });
+
+            // Auto Play
+            function startTimer() {
+                slideTimer = setInterval(nextSlide, slideInterval);
+            }
+
+            function resetTimer() {
+                clearInterval(slideTimer);
+                startTimer();
+            }
+
+            // Start the slider
+            if (slides.length > 0) {
+                startTimer();
+            }
+        });
+
+        // Smooth Scrolling Fallback
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Account for sticky header offset
+                    const headerOffset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // Check for saved user preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
