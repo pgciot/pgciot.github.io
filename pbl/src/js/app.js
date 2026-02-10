@@ -273,10 +273,10 @@ function initTheme() {
 }
 
 function updateThemeButton(isDark) {
-    if (isDark) {
-        els.btnTheme.innerHTML = '<span class="material-icons-round">light_mode</span><span>Disable Dark Mode</span>';
-    } else {
-        els.btnTheme.innerHTML = '<span class="material-icons-round">dark_mode</span><span>Enable Dark Mode</span>';
+    const icon = isDark ? 'light_mode' : 'dark_mode';
+    const text = isDark ? 'Disable Dark Mode' : 'Enable Dark Mode';
+    if (els.btnTheme) {
+        els.btnTheme.innerHTML = `<span class="material-icons-round">${icon}</span><span>${text}</span>`;
     }
 }
 
